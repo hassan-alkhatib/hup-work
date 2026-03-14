@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="z4v2Gj02jAE_edRcAYKpaVwTmqsgKigwKhTfvFLrreE" />
+<title>WorkHub – مساحة العمل المشتركة | غزة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#080712; --surface:#110f1f; --card:#16132a; --border:#1e1b35;
+  --o:#ff6b35; --p:#c77dff; --b:#56cfe1; --g:#80ffdb;
+  --text:#f0eeff; --muted:#7a7899;
+  --grad:linear-gradient(135deg,#ff6b35,#c77dff 55%,#56cfe1);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.35;}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:900;padding:1.1rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(8,7,18,.75);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05);}
+.nav-logo{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+.nav-logo-icon{width:38px;height:38px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.nav-logo-text{font-family:'Syne','Cairo',sans-serif;font-size:1.35rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;font-weight:600;transition:color .2s;}
+.nav-links a:hover{color:var(--text);}
+.nav-actions{display:flex;gap:.7rem;align-items:center;}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text);cursor:pointer;padding:.5rem 1.3rem;border-radius:999px;font-family:'Cairo',sans-serif;font-size:.85rem;font-weight:700;transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--p);color:var(--p);}
+.btn-grad{background:var(--grad);color:#fff;border:none;cursor:pointer;padding:.55rem 1.4rem;border-radius:999px;font-family:'Cairo',sans-serif;font-size:.85rem;font-weight:700;transition:opacity .2s,transform .2s;}
+.btn-grad:hover{opacity:.85;transform:scale(1.03);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.18;animation:float 8s ease-in-out infinite;}
+.orb1{width:500px;height:500px;background:var(--p);top:-120px;right:-80px;}
+.orb2{width:400px;height:400px;background:var(--o);bottom:-100px;left:-60px;animation-delay:-3s;}
+.orb3{width:300px;height:300px;background:var(--b);top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:-5s;}
+@keyframes float{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-30px) scale(1.05);}}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(199,125,255,.12);border:1px solid rgba(199,125,255,.25);border-radius:999px;padding:.4rem 1rem;font-size:.78rem;color:var(--p);margin-bottom:1.5rem;animation:fadeUp .8s ease both;}
+.hero h1{font-family:'Syne','Cairo',sans-serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;line-height:1.08;margin-bottom:1.5rem;animation:fadeUp .8s .15s ease both;}
+.hero h1 .grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{max-width:580px;color:var(--muted);font-size:1.05rem;line-height:1.75;margin:0 auto 2.5rem;animation:fadeUp .8s .3s ease both;}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s .45s ease both;}
+.hero-btns .btn-grad,.hero-btns .btn-ghost{padding:.9rem 2.2rem;font-size:1rem;}
+.stats-row{display:flex;gap:3rem;margin-top:4rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s .6s ease both;}
+.stat{text-align:center;}
+.stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-lbl{color:var(--muted);font-size:.8rem;margin-top:.2rem;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+
+/* SECTIONS */
+section{padding:6rem 2rem;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-tag{display:inline-block;background:rgba(86,207,225,.1);border:1px solid rgba(86,207,225,.2);color:var(--b);border-radius:999px;padding:.3rem .9rem;font-size:.75rem;font-weight:700;margin-bottom:1rem;}
+.section-title{font-family:'Syne','Cairo',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin-bottom:.7rem;}
+.section-sub{color:var(--muted);max-width:500px;line-height:1.7;}
+
+/* SERVICES */
+.services{background:var(--surface);}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem;margin-top:3rem;}
+.service-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem;transition:transform .25s,border-color .25s,box-shadow .25s;}
+.service-card:hover{transform:translateY(-6px);border-color:var(--p);box-shadow:0 16px 40px rgba(199,125,255,.1);}
+.service-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.2rem;}
+.service-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.5rem;}
+.service-card p{color:var(--muted);font-size:.88rem;line-height:1.65;}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem;}
+.price-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:2.2rem;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden;}
+.price-card.featured{border-color:var(--p);box-shadow:0 0 60px rgba(199,125,255,.12);}
+.price-card.featured::before{content:'⭐ الأشهر';position:absolute;top:1.2rem;left:1.2rem;background:var(--grad);color:#fff;border-radius:999px;padding:.25rem .8rem;font-size:.7rem;font-weight:700;}
+.price-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.4);}
+.price-plan{font-size:.85rem;color:var(--muted);font-weight:600;margin-bottom:.5rem;}
+.price-amount{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;}
+.price-period{color:var(--muted);font-size:.78rem;margin-bottom:1.5rem;}
+.price-features{list-style:none;margin-bottom:1.8rem;display:flex;flex-direction:column;gap:.65rem;}
+.price-features li{font-size:.88rem;color:var(--muted);display:flex;align-items:center;gap:.5rem;}
+.price-features li::before{content:'✓';color:var(--g);font-weight:900;}
+.price-btn{width:100%;padding:.85rem;border-radius:999px;border:none;font-family:'Cairo',sans-serif;font-weight:700;cursor:pointer;font-size:.9rem;transition:opacity .2s,transform .2s;}
+.price-btn:hover{opacity:.85;transform:scale(1.02);}
+.price-btn.filled{background:var(--grad);color:#fff;}
+.price-btn.outline{background:transparent;border:1px solid var(--border);color:var(--text);}
+.price-btn.outline:hover{border-color:var(--p);color:var(--p);}
+
+/* TESTIMONIALS */
+.testimonials{background:var(--surface);}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-top:3rem;}
+.testimonial-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.8rem;}
+.testimonial-stars{color:#ffd700;font-size:.85rem;margin-bottom:.8rem;}
+.testimonial-text{color:var(--muted);font-size:.88rem;line-height:1.7;margin-bottom:1.2rem;}
+.testimonial-author{display:flex;align-items:center;gap:.8rem;}
+.author-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:var(--border);}
+.author-name{font-size:.88rem;font-weight:700;}
+.author-title{font-size:.75rem;color:var(--muted);}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;}
+.contact-info{display:flex;flex-direction:column;gap:1.5rem;}
+.contact-item{display:flex;align-items:flex-start;gap:1rem;}
+.contact-icon{width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.contact-form{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:2.2rem;}
+.form-row{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.2rem;}
+.form-row label{font-size:.82rem;color:var(--muted);font-weight:600;}
+.form-row input,.form-row textarea,.form-row select{background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:.75rem 1rem;font-family:'Cairo',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;width:100%;}
+.form-row input:focus,.form-row textarea:focus,.form-row select:focus{border-color:var(--p);}
+.form-row textarea{resize:vertical;min-height:100px;}
+
+/* FOOTER */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem 2rem;}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;}
+.footer-brand p{color:var(--muted);font-size:.85rem;line-height:1.7;margin-top:.8rem;max-width:280px;}
+.footer-col h4{font-size:.85rem;font-weight:700;margin-bottom:1rem;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem;}
+.footer-col ul a{color:var(--muted);text-decoration:none;font-size:.82rem;transition:color .2s;cursor:pointer;}
+.footer-col ul a:hover{color:var(--text);}
+.footer-bottom{max-width:1100px;margin:2rem auto 0;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.footer-bottom p{color:var(--muted);font-size:.78rem;}
+
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;z-index:9999;background:rgba(8,7,18,.88);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-overlay.active{opacity:1;pointer-events:all;}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:28px;padding:2.5rem;width:100%;max-width:440px;position:relative;transform:translateY(30px) scale(.96);transition:transform .3s,opacity .3s;opacity:0;max-height:90vh;overflow-y:auto;}
+.modal-overlay.active .modal{transform:translateY(0) scale(1);opacity:1;}
+.modal-close{position:absolute;top:1.2rem;left:1.2rem;background:var(--border);border:none;color:var(--muted);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;}
+.modal-close:hover{background:rgba(255,107,53,.2);color:var(--o);}
+.modal-logo{text-align:center;margin-bottom:1.2rem;}
+.modal h2{text-align:center;font-size:1.4rem;font-weight:800;margin-bottom:.4rem;}
+.modal-sub{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:1.8rem;}
+.modal .form-row{margin-bottom:1rem;}
+.modal-submit{width:100%;padding:.9rem;border-radius:999px;border:none;background:var(--grad);color:#fff;font-family:'Cairo',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;margin-top:.5rem;transition:opacity .2s,transform .2s;}
+.modal-submit:hover{opacity:.85;transform:scale(1.02);}
+.modal-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.modal-footer{text-align:center;margin-top:1.2rem;font-size:.82rem;color:var(--muted);}
+.modal-footer a{color:var(--p);text-decoration:none;cursor:pointer;}
+.plan-badge{background:rgba(199,125,255,.12);border:1px solid rgba(199,125,255,.25);border-radius:999px;padding:.35rem 1rem;font-size:.78rem;color:var(--p);text-align:center;margin-bottom:1.5rem;}
+
+/* BOOKING OPTIONS */
+.booking-options{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1.5rem;}
+.booking-opt{background:var(--surface);border:2px solid var(--border);border-radius:14px;padding:1rem;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;}
+.booking-opt:hover,.booking-opt.selected{border-color:var(--p);background:rgba(199,125,255,.06);}
+.opt-price{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.opt-label{font-size:.78rem;color:var(--muted);margin-top:.2rem;}
+
+/* DASHBOARD BADGE */
+.dashboard-badge{display:none;align-items:center;gap:.6rem;background:var(--card);border:1px solid var(--border);border-radius:999px;padding:.4rem .4rem .4rem 1rem;cursor:pointer;transition:border-color .2s;}
+.dashboard-badge:hover{border-color:var(--p);}
+.dashboard-badge.active{display:flex;}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff;}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--g);border-radius:999px;padding:.75rem 1.8rem;font-size:.88rem;color:var(--g);z-index:99999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.error{border-color:var(--o);color:var(--o);}
+
+/* SPINNER */
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-left:6px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;}.footer-inner{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.nav-links{display:none;}nav{padding:1rem 1.2rem;}.footer-inner{grid-template-columns:1fr;gap:2rem;}.footer-bottom{flex-direction:column;gap:.5rem;text-align:center;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-icon">💻</div>
+    <span class="nav-logo-text">WorkHub</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">خدماتنا</a></li>
+    <li><a href="#pricing">الأسعار</a></li>
+    <li><a href="#testimonials">آراء العملاء</a></li>
+    <li><a href="#contact">تواصل معنا</a></li>
+  </ul>
+  <div class="nav-actions">
+    <div id="nav-auth" style="display:flex;gap:.7rem;">
+      <button class="btn-ghost" onclick="openModal('login')">تسجيل الدخول</button>
+      <button class="btn-grad" onclick="openModal('register')">إنشاء حساب</button>
+    </div>
+    <div class="dashboard-badge" id="user-badge" onclick="openModal('dashboard')">
+      <span id="user-greeting" style="font-size:.82rem;color:var(--muted);">أهلاً،</span>
+      <div class="avatar" id="user-avatar">م</div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+  <div class="hero-badge">🇵🇸 مساحة عمل في قلب غزة</div>
+  <h1>مكانك للعمل<br><span class="grad">بذكاء وإبداع</span></h1>
+  <p>WorkHub مساحة عمل مشتركة توفّر بيئة احترافية للمستقلين والطلاب في قلب غزة. اعمل، تعلّم، وابتكر في مكان صُمِّم لنجاحك.</p>
+  <div class="hero-btns">
+    <button class="btn-grad" onclick="openModal('booking')">احجز مقعدك الآن</button>
+    <button class="btn-ghost" onclick="goTo('services')">اكتشف الخدمات</button>
+  </div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">+200</div><div class="stat-lbl">عضو نشط</div></div>
+    <div class="stat"><div class="stat-num">24/7</div><div class="stat-lbl">متاح دائماً</div></div>
+    <div class="stat"><div class="stat-num">100Mbps</div><div class="stat-lbl">سرعة الإنترنت</div></div>
+    <div class="stat"><div class="stat-num">5⭐</div><div class="stat-lbl">تقييم الأعضاء</div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <span class="section-tag">✦ خدماتنا</span>
+    <h2 class="section-title">كل ما تحتاجه في مكان واحد</h2>
+    <p class="section-sub">وفّرنا لك كل الأدوات لتركّز على ما يهم — عملك وأفكارك.</p>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon" style="background:rgba(86,207,225,.12);">⚡</div><h3>إنترنت فايبر سريع</h3><p>اتصال فايبر مستمر على مدار الساعة بسرعة 100Mbps.</p></div>
+      <div class="service-card"><div class="service-icon" style="background:rgba(255,107,53,.12);">☕</div><h3>ركن القهوة المجاني</h3><p>قهوة وشاي وضيافة مجانية لجميع الأعضاء طوال اليوم.</p></div>
+      <div class="service-card"><div class="service-icon" style="background:rgba(199,125,255,.12);">🤝</div><h3>غرف اجتماعات</h3><p>مساحات مجهّزة بشاشات وكاميرات للعروض التقديمية.</p></div>
+      <div class="service-card"><div class="service-icon" style="background:rgba(128,255,219,.12);">🖨️</div><h3>طباعة ومسح ضوئي</h3><p>طابعات وأجهزة مسح ضوئي متاحة لجميع الأعضاء.</p></div>
+      <div class="service-card"><div class="service-icon" style="background:rgba(86,207,225,.12);">🔒</div><h3>خزائن شخصية</h3><p>احفظ متعلقاتك بأمان في خزائن مقفلة خاصة بك.</p></div>
+      <div class="service-card"><div class="service-icon" style="background:rgba(199,125,255,.12);">🎓</div><h3>ورش وفعاليات</h3><p>ورش عمل وفعاليات تقنية وشبكات تواصل مهنية دورية.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <span class="section-tag">✦ الأسعار</span>
+    <h2 class="section-title">خطط مرنة لكل احتياج</h2>
+    <p class="section-sub">اختر الخطة التي تناسبك، يمكنك الترقية أو الإلغاء في أي وقت.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-plan">يومي</div><div class="price-amount">15 ₪</div><div class="price-period">لكل يوم</div>
+        <ul class="price-features"><li>مقعد مفتوح</li><li>واي فاي عالي السرعة</li><li>قهوة مجانية</li><li>طباعة (10 صفحات)</li></ul>
+        <button class="price-btn outline" onclick="openSubscribe('يومي','15 ₪')">ابدأ الآن</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-plan">شهري</div><div class="price-amount">250 ₪</div><div class="price-period">لكل شهر • وفّر 38%</div>
+        <ul class="price-features"><li>مقعد ثابت مخصص</li><li>واي فاي غير محدود</li><li>ضيافة غير محدودة</li><li>طباعة (100 صفحة)</li><li>خزانة شخصية</li><li>دعوة للفعاليات الشهرية</li></ul>
+        <button class="price-btn filled" onclick="openSubscribe('شهري','250 ₪')">اشترك الآن</button>
+      </div>
+      <div class="price-card">
+        <div class="price-plan">سنوي</div><div class="price-amount">2200 ₪</div><div class="price-period">لكل سنة • وفّر 27%</div>
+        <ul class="price-features"><li>كل مزايا الشهري</li><li>غرفة اجتماعات (4 ساعات/شهر)</li><li>طباعة غير محدودة</li><li>أولوية الحجز</li><li>دعم مخصص</li></ul>
+        <button class="price-btn outline" onclick="openSubscribe('سنوي','2200 ₪')">اشترك الآن</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-inner">
+    <span class="section-tag">✦ آراء الأعضاء</span>
+    <h2 class="section-title">ماذا يقول أعضاؤنا</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"WorkHub غيّر حياتي المهنية! البيئة الاحترافية ساعدتني على الإنتاج بشكل لم أتخيله."</p><div class="testimonial-author"><div class="author-avatar">👩</div><div><div class="author-name">سارة أبو عمر</div><div class="author-title">مصممة جرافيك مستقلة</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"الإنترنت السريع والهدوء جعلاني أنجز مشاريعي ضعف ما كنت أنجزه من المنزل!"</p><div class="testimonial-author"><div class="author-avatar">👨</div><div><div class="author-name">محمد الشريف</div><div class="author-title">مطوّر ويب</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"مجتمع رائع من المهنيين الشباب. تعرّفت هنا على شركائي في العمل!"</p><div class="testimonial-author"><div class="author-avatar">👩</div><div><div class="author-name">رنا حداد</div><div class="author-title">رائدة أعمال</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <span class="section-tag">✦ تواصل معنا</span>
+    <h2 class="section-title">نحن هنا لمساعدتك</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item"><div class="contact-icon">📍</div><div><div style="font-weight:700;margin-bottom:.3rem;">العنوان</div><div style="color:var(--muted);font-size:.88rem;line-height:1.6;">شارع عمر المختار، غزة، فلسطين</div></div></div>
+        <div class="contact-item"><div class="contact-icon">📞</div><div><div style="font-weight:700;margin-bottom:.3rem;">الهاتف</div><div style="color:var(--muted);font-size:.88rem;">+970 59 000 0000</div></div></div>
+        <div class="contact-item"><div class="contact-icon">📧</div><div><div style="font-weight:700;margin-bottom:.3rem;">البريد الإلكتروني</div><div style="color:var(--muted);font-size:.88rem;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c8a0ada4a4a788bfa7baa3a0bdaae6b8bb">[email&#160;protected]</a></div></div></div>
+        <div class="contact-item"><div class="contact-icon">🕐</div><div><div style="font-weight:700;margin-bottom:.3rem;">أوقات العمل</div><div style="color:var(--muted);font-size:.88rem;line-height:1.6;">السبت – الخميس<br>8:00 ص – 10:00 م</div></div></div>
+      </div>
+      <div class="contact-form">
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1.5rem;">أرسل لنا رسالة</h3>
+        <div class="form-row"><label>الاسم الكامل</label><input type="text" id="contact-name" placeholder="أدخل اسمك"></div>
+        <div class="form-row"><label>البريد الإلكتروني</label><input type="email" id="contact-email" placeholder="your@email.com"></div>
+        <div class="form-row"><label>الرسالة</label><textarea id="contact-msg" placeholder="كيف يمكننا مساعدتك؟"></textarea></div>
+        <button class="btn-grad" id="contact-btn" style="width:100%;padding:.85rem;font-size:.95rem;" onclick="sendContact()">إرسال الرسالة ✉️</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="nav-logo-text" style="font-size:1.8rem;">WorkHub</span>
+      <p>مساحة عمل مشتركة في قلب غزة، مصمّمة لتمكين المهنيين والمبدعين الفلسطينيين.</p>
+    </div>
+    <div class="footer-col"><h4>روابط سريعة</h4><ul><li><a onclick="goTo('services')">الخدمات</a></li><li><a onclick="goTo('pricing')">الأسعار</a></li><li><a onclick="goTo('testimonials')">آراء العملاء</a></li><li><a onclick="goTo('contact')">تواصل معنا</a></li></ul></div>
+    <div class="footer-col"><h4>الحساب</h4><ul><li><a onclick="openModal('login')">تسجيل الدخول</a></li><li><a onclick="openModal('register')">إنشاء حساب</a></li><li><a onclick="openModal('booking')">احجز الآن</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 WorkHub. جميع الحقوق محفوظة.</p>
+    <p>🇵🇸 غزة، فلسطين</p>
+  </div>
+</footer>
+
+<!-- ══════ MODALS ══════ -->
+
+<!-- LOGIN -->
+<div class="modal-overlay" id="modal-login">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('login')">✕</button>
+    <div class="modal-logo"><span class="nav-logo-text">WorkHub</span></div>
+    <h2>مرحباً بك مجدداً!</h2>
+    <p class="modal-sub">سجّل دخولك للوصول إلى حسابك</p>
+    <div class="form-row"><label>البريد الإلكتروني</label><input type="email" id="login-email" placeholder="your@email.com"></div>
+    <div class="form-row"><label>كلمة المرور</label><input type="password" id="login-pass" placeholder="••••••••"></div>
+    <button class="modal-submit" id="login-btn" onclick="doLogin()">تسجيل الدخول</button>
+    <p class="modal-footer">ليس لديك حساب؟ <a onclick="switchModal('login','register')">إنشاء حساب مجاني</a></p>
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div class="modal-overlay" id="modal-register">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('register')">✕</button>
+    <div class="modal-logo"><span class="nav-logo-text">WorkHub</span></div>
+    <h2>انضم إلينا اليوم</h2>
+    <p class="modal-sub">أنشئ حسابك وابدأ رحلتك معنا</p>
+    <div class="form-row"><label>الاسم الكامل *</label><input type="text" id="reg-name" placeholder="محمد أحمد"></div>
+    <div class="form-row"><label>البريد الإلكتروني *</label><input type="email" id="reg-email" placeholder="your@email.com"></div>
+    <div class="form-row"><label>رقم الهاتف *</label><input type="tel" id="reg-phone" placeholder="+970 5X XXX XXXX"></div>
+    <div class="form-row"><label>كلمة المرور *</label><input type="password" id="reg-pass" placeholder="6 أحرف على الأقل" minlength="6"></div>
+    <div class="form-row"><label>المهنة</label>
+      <select id="reg-job"><option value="">اختر مهنتك</option><option>مطوّر برمجيات</option><option>مصمم جرافيك</option><option>كاتب / محرر</option><option>رائد أعمال</option><option>طالب</option><option>أخرى</option></select>
+    </div>
+    <button class="modal-submit" id="reg-btn" onclick="doRegister()">إنشاء الحساب مجاناً 🚀</button>
+    <p class="modal-footer">لديك حساب؟ <a onclick="switchModal('register','login')">تسجيل الدخول</a></p>
+  </div>
+</div>
+
+<!-- BOOKING -->
+<div class="modal-overlay" id="modal-booking">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('booking')">✕</button>
+    <div class="modal-logo"><span class="nav-logo-text">WorkHub</span></div>
+    <h2>احجز مقعدك</h2>
+    <p class="modal-sub">اختر الخطة والتاريخ الذي يناسبك</p>
+    <div class="booking-options">
+      <div class="booking-opt selected" onclick="selectPlan(this,'يومي','15 ₪')"><div class="opt-price">15 ₪</div><div class="opt-label">يومي</div></div>
+      <div class="booking-opt" onclick="selectPlan(this,'أسبوعي','80 ₪')"><div class="opt-price">80 ₪</div><div class="opt-label">أسبوعي</div></div>
+      <div class="booking-opt" onclick="selectPlan(this,'شهري','250 ₪')"><div class="opt-price">250 ₪</div><div class="opt-label">شهري</div></div>
+      <div class="booking-opt" onclick="selectPlan(this,'سنوي','2200 ₪')"><div class="opt-price">2200 ₪</div><div class="opt-label">سنوي</div></div>
+    </div>
+    <div class="form-row"><label>تاريخ البدء</label><input type="date" id="booking-date"></div>
+    <div class="form-row"><label>ملاحظات (اختياري)</label><input type="text" id="booking-note" placeholder="أي متطلبات خاصة؟"></div>
+    <button class="modal-submit" id="booking-btn" onclick="doBooking()">تأكيد الحجز ✅</button>
+  </div>
+</div>
+
+<!-- SUBSCRIBE -->
+<div class="modal-overlay" id="modal-subscribe">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('subscribe')">✕</button>
+    <div class="modal-logo"><span class="nav-logo-text">WorkHub</span></div>
+    <h2>اشتراك جديد</h2>
+    <p class="modal-sub">يسعدنا انضمامك إلى مجتمع WorkHub</p>
+    <div class="plan-badge" id="subscribe-plan-badge">📦 الخطة الشهرية – 250 ₪</div>
+    <div class="form-row"><label>الاسم الكامل *</label><input type="text" id="sub-name" placeholder="محمد أحمد"></div>
+    <div class="form-row"><label>البريد الإلكتروني *</label><input type="email" id="sub-email" placeholder="your@email.com"></div>
+    <div class="form-row"><label>رقم الهاتف *</label><input type="tel" id="sub-phone" placeholder="+970 5X XXX XXXX"></div>
+    <button class="modal-submit" id="sub-btn" onclick="doSubscribe()">تأكيد الاشتراك 🎉</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="modal-overlay" id="modal-dashboard">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('dashboard')">✕</button>
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <div style="width:70px;height:70px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto .8rem;" id="dash-avatar-big">👤</div>
+      <h2 id="dash-name">اسم المستخدم</h2>
+      <p class="modal-sub" id="dash-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="61040c00080d210419000c110d044f020e0c">[email&#160;protected]</a></p>
+    </div>
+    <div style="background:var(--surface);border-radius:14px;padding:1rem 1.2rem;margin-bottom:.8rem;display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-size:.85rem;color:var(--muted);">حالة الاشتراك</span>
+      <span id="dash-plan" style="font-size:.82rem;background:rgba(128,255,219,.1);color:var(--g);border:1px solid rgba(128,255,219,.2);border-radius:999px;padding:.2rem .8rem;">لا يوجد اشتراك</span>
+    </div>
+    <div style="background:var(--surface);border-radius:14px;padding:1rem 1.2rem;margin-bottom:1.2rem;display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-size:.85rem;color:var(--muted);">المهنة</span>
+      <span id="dash-job" style="font-size:.82rem;color:var(--text);">—</span>
+    </div>
+    <button class="btn-grad" style="width:100%;padding:.8rem;font-size:.9rem;margin-bottom:.7rem;" onclick="closeModal('dashboard');openModal('booking')">+ احجز الآن</button>
+    <button class="btn-ghost" style="width:100%;padding:.8rem;font-size:.9rem;margin-bottom:.7rem;border-color:#80ffdb;color:#80ffdb;" onclick="exportToExcel()">⬇️ تحميل البيانات Excel</button>
+    <button class="btn-ghost" style="width:100%;padding:.8rem;font-size:.9rem;" onclick="doLogout()">تسجيل الخروج 👋</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ═══════════════════════════════════════════════════════════
+//  ⚙️  الإعداد: ضع رابط Google Apps Script هنا بعد النشر
+//  راجع ملف SETUP.md داخل المجلد للخطوات التفصيلية
+// ═══════════════════════════════════════════════════════════
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-Dm9Olt8bkUTM2ukhq0Rr51lTculHUNM2xCft_KoPQ8Zn9U1i1Y4PpgT5MHaRT6Cniw/exec";
+// ═══════════════════════════════════════════════════════════
+
+let currentUser = null;
+let selectedBookingPlan = { name: 'يومي', price: '15 ₪' };
+
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('booking-date').min = today;
+document.getElementById('booking-date').value = today;
+
+// ── MODALS ──
+function openModal(n){ document.getElementById('modal-'+n).classList.add('active'); document.body.style.overflow='hidden'; }
+function closeModal(n){ document.getElementById('modal-'+n).classList.remove('active'); document.body.style.overflow=''; }
+function switchModal(a,b){ closeModal(a); setTimeout(()=>openModal(b),200); }
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click',function(e){ if(e.target===this){ this.classList.remove('active'); document.body.style.overflow=''; } });
+});
+
+// ── TOAST ──
+function showToast(msg, err=false){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className='toast'+(err?' error':'');
+  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// ── LOADING ──
+function setLoading(id,on){
+  const b=document.getElementById(id); if(!b)return;
+  b.disabled=on;
+  if(on){ b.dataset.orig=b.innerHTML; b.innerHTML='جارٍ الإرسال... <span class="spinner"></span>'; }
+  else{ b.innerHTML=b.dataset.orig||b.innerHTML; }
+}
+
+// ── SEND TO GOOGLE SHEETS ──
+async function sendToSheets(data){
+  if(!SCRIPT_URL || SCRIPT_URL.indexOf('script.google.com') === -1){ console.warn('⚠️ SCRIPT_URL غير صحيح'); return {mock:true}; }
+  try{
+    await fetch(SCRIPT_URL,{ method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
+    return {ok:true};
+  }catch(e){ console.error(e); return {ok:false}; }
+}
+
+// ── LOGIN ──
+async function doLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const pass=document.getElementById('login-pass').value;
+  if(!email||!pass){showToast('❗ يرجى تعبئة جميع الحقول',true);return;}
+  if(!email.includes('@')){showToast('❗ البريد الإلكتروني غير صحيح',true);return;}
+  if(pass.length<4){showToast('❗ كلمة المرور قصيرة جداً',true);return;}
+  setLoading('login-btn',true);
+  await sendToSheets({ sheet:'تسجيل_الدخول', timestamp:new Date().toLocaleString('ar-EG'), email, action:'تسجيل دخول' });
+  DB.push('logins', [new Date().toLocaleString('ar-EG'), email, 'تسجيل دخول']);
+  setLoading('login-btn',false);
+  const name=email.split('@')[0];
+  loginUser({name,email,plan:null,job:'—'});
+  closeModal('login');
+  showToast(`✅ أهلاً ${name}! تم تسجيل الدخول بنجاح`);
+  document.getElementById('login-email').value='';
+  document.getElementById('login-pass').value='';
+}
+
+// ── REGISTER ──
+async function doRegister(){
+  const name=document.getElementById('reg-name').value.trim();
+  const email=document.getElementById('reg-email').value.trim();
+  const phone=document.getElementById('reg-phone').value.trim();
+  const pass=document.getElementById('reg-pass').value;
+  const job=document.getElementById('reg-job').value||'غير محدد';
+  if(!name||!email||!phone||!pass){showToast('❗ يرجى تعبئة جميع الحقول المطلوبة',true);return;}
+  if(!email.includes('@')){showToast('❗ البريد الإلكتروني غير صحيح',true);return;}
+  if(pass.length<6){showToast('❗ كلمة المرور يجب أن تكون 6 أحرف على الأقل',true);return;}
+  setLoading('reg-btn',true);
+  await sendToSheets({ sheet:'المسجلين_الجدد', timestamp:new Date().toLocaleString('ar-EG'), name, email, phone, job, action:'تسجيل جديد' });
+  DB.push('registrations', [new Date().toLocaleString('ar-EG'), name, email, phone, job, 'تسجيل جديد']);
+  setLoading('reg-btn',false);
+  loginUser({name,email,phone,job,plan:null});
+  closeModal('register');
+  showToast(`🎉 مرحباً ${name}! تم إنشاء حسابك بنجاح`);
+  ['reg-name','reg-email','reg-phone','reg-pass'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('reg-job').value='';
+}
+
+// ── LOGIN STATE ──
+function loginUser(user){
+  currentUser=user;
+  document.getElementById('nav-auth').style.display='none';
+  document.getElementById('user-badge').classList.add('active');
+  document.getElementById('user-greeting').textContent=`أهلاً، ${user.name.split(' ')[0]}`;
+  document.getElementById('user-avatar').textContent=user.name.charAt(0).toUpperCase();
+  document.getElementById('dash-name').textContent=user.name;
+  document.getElementById('dash-email').textContent=user.email;
+  document.getElementById('dash-avatar-big').textContent=user.name.charAt(0).toUpperCase();
+  document.getElementById('dash-job').textContent=user.job||'—';
+}
+
+// ── LOGOUT ──
+function doLogout(){
+  currentUser=null; closeModal('dashboard');
+  document.getElementById('nav-auth').style.display='flex';
+  document.getElementById('user-badge').classList.remove('active');
+  showToast('👋 تم تسجيل الخروج بنجاح');
+}
+
+// ── BOOKING ──
+function selectPlan(el,name,price){
+  document.querySelectorAll('.booking-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected'); selectedBookingPlan={name,price};
+}
+async function doBooking(){
+  const date=document.getElementById('booking-date').value;
+  const note=document.getElementById('booking-note').value.trim();
+  if(!date){showToast('❗ يرجى اختيار تاريخ البدء',true);return;}
+  if(!currentUser){ closeModal('booking'); showToast('🔑 يرجى تسجيل الدخول أولاً'); setTimeout(()=>openModal('login'),500); return; }
+  setLoading('booking-btn',true);
+  await sendToSheets({ sheet:'الحجوزات', timestamp:new Date().toLocaleString('ar-EG'), name:currentUser.name, email:currentUser.email, phone:currentUser.phone||'—', plan:selectedBookingPlan.name, price:selectedBookingPlan.price, date, note });
+  DB.push('bookings', [new Date().toLocaleString('ar-EG'), currentUser.name, currentUser.email, currentUser.phone||'—', selectedBookingPlan.name, selectedBookingPlan.price, date, note]);
+  setLoading('booking-btn',false);
+  currentUser.plan=selectedBookingPlan.name;
+  document.getElementById('dash-plan').textContent=`${selectedBookingPlan.name} – ${selectedBookingPlan.price}`;
+  closeModal('booking');
+  showToast(`🎊 تم تأكيد حجزك – ${selectedBookingPlan.name} بتاريخ ${date}`);
+}
+
+// ── SUBSCRIBE ──
+function openSubscribe(plan,price){
+  document.getElementById('subscribe-plan-badge').textContent=`📦 الخطة ${plan} – ${price}`;
+  if(currentUser){ document.getElementById('sub-name').value=currentUser.name; document.getElementById('sub-email').value=currentUser.email; document.getElementById('sub-phone').value=currentUser.phone||''; }
+  openModal('subscribe');
+}
+async function doSubscribe(){
+  const name=document.getElementById('sub-name').value.trim();
+  const email=document.getElementById('sub-email').value.trim();
+  const phone=document.getElementById('sub-phone').value.trim();
+  const plan=document.getElementById('subscribe-plan-badge').textContent;
+  if(!name||!email||!phone){showToast('❗ يرجى تعبئة جميع الحقول',true);return;}
+  if(!email.includes('@')){showToast('❗ البريد الإلكتروني غير صحيح',true);return;}
+  setLoading('sub-btn',true);
+  await sendToSheets({ sheet:'الاشتراكات', timestamp:new Date().toLocaleString('ar-EG'), name, email, phone, plan, action:'اشتراك جديد' });
+  DB.push('subscriptions', [new Date().toLocaleString('ar-EG'), name, email, phone, plan, 'اشتراك جديد']);
+  setLoading('sub-btn',false);
+  closeModal('subscribe');
+  showToast('🎉 تم تسجيل اشتراكك! سنتواصل معك قريباً');
+  if(!currentUser) loginUser({name,email,phone,plan,job:'—'});
+  else{ currentUser.plan=plan; document.getElementById('dash-plan').textContent=plan; }
+}
+
+// ── CONTACT ──
+async function sendContact(){
+  const name=document.getElementById('contact-name').value.trim();
+  const email=document.getElementById('contact-email').value.trim();
+  const msg=document.getElementById('contact-msg').value.trim();
+  if(!name||!email||!msg){showToast('❗ يرجى تعبئة جميع الحقول',true);return;}
+  if(!email.includes('@')){showToast('❗ البريد الإلكتروني غير صحيح',true);return;}
+  setLoading('contact-btn',true);
+  await sendToSheets({ sheet:'رسائل_التواصل', timestamp:new Date().toLocaleString('ar-EG'), name, email, message:msg });
+  DB.push('contacts', [new Date().toLocaleString('ar-EG'), name, email, msg]);
+  setLoading('contact-btn',false);
+  document.getElementById('contact-name').value='';
+  document.getElementById('contact-email').value='';
+  document.getElementById('contact-msg').value='';
+  showToast('✅ تم إرسال رسالتك! سنرد عليك خلال 24 ساعة');
+}
+
+
+// ── LOCAL DATA STORAGE ──
+const DB = {
+  get(key){ try{ return JSON.parse(localStorage.getItem('wh_'+key)||'[]'); }catch(e){ return []; } },
+  push(key, row){ const arr=this.get(key); arr.push(row); localStorage.setItem('wh_'+key, JSON.stringify(arr)); }
+};
+
+// ── EXPORT TO EXCEL ──
+function exportToExcel(){
+  const sheets = [
+    { key:'registrations', name:'المسجلين الجدد',  headers:['التاريخ والوقت','الاسم الكامل','البريد الإلكتروني','رقم الهاتف','المهنة','الإجراء'] },
+    { key:'logins',        name:'تسجيل الدخول',    headers:['التاريخ والوقت','البريد الإلكتروني','الإجراء'] },
+    { key:'bookings',      name:'الحجوزات',         headers:['التاريخ والوقت','الاسم','البريد الإلكتروني','الهاتف','الخطة','السعر','تاريخ البدء','ملاحظات'] },
+    { key:'subscriptions', name:'الاشتراكات',       headers:['التاريخ والوقت','الاسم','البريد الإلكتروني','الهاتف','الخطة المختارة','الإجراء'] },
+    { key:'contacts',      name:'رسائل التواصل',    headers:['التاريخ والوقت','الاسم','البريد الإلكتروني','نص الرسالة'] },
+  ];
+
+  let hasData = false;
+  sheets.forEach(s => { if(DB.get(s.key).length > 0) hasData = true; });
+  if(!hasData){ showToast('❗ لا توجد بيانات بعد، سجّل أو احجز أولاً', true); return; }
+
+  // Build Excel XML (SpreadsheetML format - opens directly in Excel)
+  let xml = '<?xml version="1.0" encoding="UTF-8"?><?mso-application progid="Excel.Sheet"?>';
+  xml += '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" ';
+  xml += 'xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" ';
+  xml += 'xmlns:x="urn:schemas-microsoft-com:office:excel">';
+  xml += '<Styles>';
+  xml += '<Style ss:ID="header"><Font ss:Bold="1" ss:Color="#C77DFF" ss:Size="11"/><Interior ss:Color="#1A1A2E" ss:Pattern="Solid"/><Alignment ss:Horizontal="Center"/></Style>';
+  xml += '<Style ss:ID="data"><Alignment ss:Horizontal="Center" ss:WrapText="1"/></Style>';
+  xml += '<Style ss:ID="alt"><Interior ss:Color="#F8F5FF" ss:Pattern="Solid"/><Alignment ss:Horizontal="Center" ss:WrapText="1"/></Style>';
+  xml += '</Styles>';
+
+  sheets.forEach(s => {
+    const rows = DB.get(s.key);
+    xml += '<Worksheet ss:Name="' + s.name + '">';
+    xml += '<Table>';
+    // Header row
+    xml += '<Row ss:Height="28">';
+    s.headers.forEach(h => {
+      xml += '<Cell ss:StyleID="header"><Data ss:Type="String">' + escXml(h) + '</Data></Cell>';
+    });
+    xml += '</Row>';
+    // Data rows
+    rows.forEach((row, i) => {
+      const style = i % 2 === 0 ? 'data' : 'alt';
+      xml += '<Row ss:Height="22">';
+      row.forEach(cell => {
+        xml += '<Cell ss:StyleID="' + style + '"><Data ss:Type="String">' + escXml(String(cell||'')) + '</Data></Cell>';
+      });
+      xml += '</Row>';
+    });
+    if(rows.length === 0){
+      xml += '<Row><Cell><Data ss:Type="String">لا توجد بيانات بعد</Data></Cell></Row>';
+    }
+    xml += '</Table></Worksheet>';
+  });
+
+  xml += '</Workbook>';
+
+  const blob = new Blob(['﻿' + xml], {type: 'application/vnd.ms-excel;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'WorkHub_بيانات_' + new Date().toLocaleDateString('ar-EG').replace(/\//g,'-') + '.xls';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('✅ تم تحميل ملف Excel بنجاح!');
+}
+
+function escXml(str){
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── SCROLL ──
+function goTo(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){ const t=document.querySelector(this.getAttribute('href')); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});} });
+});
+</script>
+</body>
+</html>
